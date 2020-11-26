@@ -2,7 +2,7 @@ let userModel = require('../../models/User');
 
 exports.index = async (req, res) => {
     let users = await userModel.getUsers();
-    console.log(users[0].name); 
+    console.log(users); 
     res.render('layouts/admin');
 };
 
