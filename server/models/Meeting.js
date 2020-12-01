@@ -9,3 +9,37 @@ exports.createMeetingReservation = async (data) => {
         });
     });
 }
+
+exports.getMeetings = async() => {
+    con.connect();
+    let sql = "SELECT * FROM meeting_reservation ORDER BY id DESC LIMIT 10 OFFSET 10;";
+    let data = await new Promise((resolve, reject) => {
+        con.query(sql, (err,res) => {
+            if (res) {
+                console.log(res);
+                resolve(res.rows);
+            } else {
+                console.log('_____________');
+                console.log('ERROR');
+            }
+        });
+    })
+    return data;
+}
+
+exports.getDetailMeetingByMeetingId = async(meetingId) => {
+    con.connect();
+    let sql = "SELECT * FROM meeting_reservation WHERE meeting_id = '87604934913'";
+    let data = await new Promise((resolve, reject) => {
+        con.query(sql, (err,res) => {
+            if (res) {
+                resolve(res.rows);
+            } else {
+                console.log('_____________');
+                console.log(err);
+                console.log('_____________');
+            }
+        });
+    })
+    return data;
+}
